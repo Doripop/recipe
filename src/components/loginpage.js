@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux"
 import { useRef } from "react";
-import { logIn } from "./redux/module/login";
+import { logIn } from "../redux/module/login";
 
 
 

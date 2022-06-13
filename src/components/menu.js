@@ -3,7 +3,8 @@ import styled from "styled-components"
 import Card from 'react-bootstrap/Card'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { LoadRecipe } from "./redux/module/login";
+import { LoadRecipe } from "../redux/module/login";
+
 
 const Menu = (props) => {
     const parm = useParams()
@@ -16,6 +17,7 @@ const Menu = (props) => {
         dispatch(LoadRecipe(parm.menu));
         });
 
+        
     return (
         <>
 

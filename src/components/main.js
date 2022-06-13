@@ -3,7 +3,6 @@ import { useRef, useEffect } from "react";
 import styled from "styled-components"
 import { keyframes } from "styled-components";
 import Card from 'react-bootstrap/Card'
-import Menu from "./menu";
 import { Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 

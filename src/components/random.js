@@ -7,7 +7,7 @@ import Main from "./main";
 const Random = (props) => {
 
 
-    const menu = ["밥", "김말이", "치킨", "떡볶이", "김밥", "치즈 돈까스"]
+
 
 
 

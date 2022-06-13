@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card'
-import Repair from "./repair";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { recipeDelete, recipeLoadSV } from "./redux/module/crud";
+import { recipeDelete, recipeLoadSV } from "../redux/module/crud";
 
 
 

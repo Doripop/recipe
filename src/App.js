@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components"
 
 ////라우터 페이지
-import Random from "./random";
-import LoginPage from "./loginpage";
-import SignUp from "./signup";
-import Writepage from "./writepage";
-import Menu from "./menu";
-import MyPage from "./mypage";
-import Repair from "./repair";
+import Random from "./components/random";
+import LoginPage from "./components/loginpage";
+import SignUp from "./components/signup";
+import Writepage from "./components/writepage";
+import Menu from "./components/menu";
+import MyPage from "./components/mypage";
+import Repair from "./components/repair";
 //라우터
 import { Route, Routes } from "react-router-dom"
 import { useNavigate } from "react-router-dom";

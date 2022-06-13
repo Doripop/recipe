@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import {useDispatch} from "react-redux"
-import { signUP } from "./redux/module/login";
+import { signUP } from "../redux/module/login";
 
 
 const SignUp = () => {

@@ -1,17 +1,16 @@
-import React, {useState} from "react";
-import styled from "styled-components"
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
 import FormControl from 'react-bootstrap/Card'
-import { recipeUpload } from "./redux/module/crud";
+import { recipeUpdate } from "../redux/module/crud";
 
 
-const Writepage = () => {
-
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+const Repair = (props) => {
 
     const [imageSrc, setImageSrc] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const comment = React.useRef(null);
     const title = React.useRef(null);
@@ -26,32 +25,41 @@ const Writepage = () => {
         };
         });
     };
+    // console.log(imageSrc);
+    
+    const parm = useParams()
+    
+    const recipe_list = useSelector((state) => state.crud.list);
+    
+    const recipe_idx = recipe_list.findIndex((index) => {
+        
+        return index.id === parseInt(parm.id);
+      });
 
-    const recipe = () => {
-        dispatch(recipeUpload({
-            contents: comment.current.value,
-            image : imageSrc,
-            title : title.current.value
+    const orginImage = recipe_list[recipe_idx].image
+      console.log(recipe_list[recipe_idx].contents)
+      
+      const newRecipe = () => {
+        dispatch(recipeUpdate({
+            contents: comment.current.value == ""?recipe_list[recipe_idx].contents : comment.current.value,
+            image : imageSrc ==null? orginImage : imageSrc,
+            title : title.current.value == ""? recipe_list[recipe_idx].title : title.current.value,
+            id : recipe_list[recipe_idx].id
         }))
         navigate("/")
     }
-    // 닉네임 추가?????
-    // console.log(imageSrc)
-    //  window.setTimeout(() => {
-    //     console.log(
-    //         comment.current.value, 
-    //         )
-    // }, 5000);
+    
 
+    
 
     return (
         <>
             <Box>
                 <Htag>
-                    레시피 작성~!
+                    레시피 수정~!
                 </Htag>
                 <Htag>요리 이름!! : </Htag>
-                    <Bar ref={title} placeholder="멋진 제목을 붙여주세요~" style={{marginBottom:"-10px"}}></Bar>
+                    <Bar ref={title} placeholder={recipe_list[recipe_idx].title} style={{marginBottom:"-10px"}}></Bar>
                 <div style={{ display: "flex", justifyContent: "center", flexDirection:"column" }}>
                     <Htag>레시피 : </Htag>
                     <FormControl ref={comment} as="textarea" aria-label="With textarea" style={{width:"195px", height:"91px"}}/>
@@ -64,13 +72,15 @@ const Writepage = () => {
                     {imageSrc && <Image src={imageSrc} alt="preview-img" />}
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <But onClick={() => { recipe() }}>Save~!</But>
+                    <But onClick={() => { newRecipe() }}>Save~!</But>
                     <But onClick={() => { navigate("/") }}>Back</But>
                 </div>
             </Box>
         </>
     )
+
 }
+
 
 const Box = styled.div`
     width:450px;
@@ -117,5 +127,4 @@ const Image = styled.img`
     height:180px;
 `;
 
-export default Writepage;
-
+export default Repair;
