@@ -4,12 +4,19 @@ import Card from 'react-bootstrap/Card'
 import Repair from "./repair";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { recipeDelete } from "./redux/module/crud";
+import { recipeDelete, recipeLoadSV } from "./redux/module/crud";
 
 
 
 
 const MyPage = (props) => {
+
+    React.useEffect(()=>{  
+        dispatch( recipeLoadSV());
+        });
+    
+        
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const recipe_list = useSelector((state) => state.crud.list);

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 const ADD = "recipe/ADD";
 const DELETE = "recipe/DELETE";
 const UPDATE = "recipe/UPDATE"
+const LOAD = "recipe/LOAD"
 
 
 const initialState = {
@@ -33,8 +34,28 @@ export function recipeUPDATE(recipeRepair, recipe_index) {
 }
 
 
+export function recipeLOAD(recipe_list) {
+    return { type: LOAD, recipe_list };
+}
+
+
 //middleWare
 
+export const recipeLoadSV = () => {
+    return async function (dispatch) {
+     await  axios.get("http://localhost:5001//api/board").then(response => {
+            console.log(response);
+
+            let recipe_list = [];
+            response.forEach((res) => {
+            recipe_list.push({ id: res.id, ...res.data() });
+            dispatch(recipeLOAD(recipe_list));
+        });
+        });
+        
+      
+    }
+}
 
 export const recipeUpload = (recipeInfo) => {
     return function (dispacth) {
@@ -80,7 +101,7 @@ export const recipeUpdate = (recipeRepair) => {
 
 export const recipeDelete = (recipeDelete) => {
     return function (dispacth, getState) {
-        // axios.put(`http://api/board/id:${recipeDelete}`,recipeRepair)
+        // axios.delete(`http://api/board/id:${recipeDelete}`,recipeRepair)
         console.log(recipeDelete);
         axios.delete(`http://api/board/id:${recipeDelete}`).then(response => {
             console.log(response);
@@ -135,6 +156,10 @@ export default function reducer(state = initialState, action = {}) {
             return { list: new_recipe_list };
         }
 
+        case "recipe/LOAD": {
+            // console.log(action.card_list);
+            return { list: action.recipe_list };
+        }
 
         default:
             return state;
