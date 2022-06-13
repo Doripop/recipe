@@ -68,11 +68,9 @@ export const signUP = (userInfo) =>{
 }
 //////로그인////////////
 export const logIn = (loginInfo) => {
-    let form = new FormData()
-    form.append("username",loginInfo.username)
-    form.append("password",loginInfo.password)
+
     return function (dispacth) {
-          axios.post("http://localhost:8080/user/login",  form).then(response => {
+          axios.post("http://localhost:8080/user/login", loginInfo).then(response => {
             console.log(response);
           });
         }

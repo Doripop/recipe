@@ -16,7 +16,6 @@ const initialState = {
         { contents: "떡볶이 만들기", image: "", title: "자장면", id: 2 },
         { contents: "제육 만들기", image: "", title: "자장면", id: 3 },
         { contents: "마라탕 만들기", image: "", title: "자장면", id: 4 },
-
     ]
 }
 
@@ -71,7 +70,7 @@ export const recipeUpload = (recipeInfo) => {
         // }
 
         const newrecipe = { ...recipeInfo }
-        console.log(newrecipe);
+        // console.log(newrecipe);
         dispacth(recipeAdd(newrecipe))
     }
 }
@@ -102,13 +101,13 @@ export const recipeUpdate = (recipeRepair) => {
 export const recipeDelete = (recipeDelete) => {
     return function (dispacth, getState) {
         // axios.delete(`http://api/board/id:${recipeDelete}`,recipeRepair)
-        console.log(recipeDelete);
+        // console.log(recipeDelete);
         axios.delete(`http://api/board/id:${recipeDelete}`).then(response => {
             console.log(response);
         })
 
         const _recipe_list = getState().crud.list;
-        console.log(_recipe_list, "리스트다아아아")
+        // console.log(_recipe_list, "리스트다아아아")
         const recipe_index = _recipe_list.findIndex((_recipe) => {
             //    console.log(_recipe.id,recipeRepair.id ,"앞쪽이 불러온거" )
             return _recipe.id === recipeDelete;
@@ -127,15 +126,14 @@ export default function reducer(state = initialState, action = {}) {
 
         case "recipe/ADD": {
             const new_recipe_list = [...state.list, action.post];
-            console.log(new_recipe_list, "저장했으면 손!");
+            // console.log(new_recipe_list, "저장했으면 손!");
             return { list: new_recipe_list };
         }
 
         case "recipe/UPDATE": {
             const new_recipe_list = state.list.map((item, index) => {
-                console.log(action, "이게 맞아야할텐데")
+                // console.log(action, "이게 맞아야할텐데")
                 if (parseInt(action.recipe_index) === index) {
-
                     return {
                         contents: action.recipeRepair.contents,
                         image: action.recipeRepair.image,
@@ -145,14 +143,14 @@ export default function reducer(state = initialState, action = {}) {
                 } else return item;
 
             })
-            console.log("바꿨어", new_recipe_list)
+            // console.log("바꿨어", new_recipe_list)
             return { list: new_recipe_list };
         }
         case "recipe/DELETE": {
             const new_recipe_list = state.list.filter((item, index) => {
                 return parseInt(action.recipe_index) !== index;
             })
-            console.log("지웠어!", new_recipe_list)
+            // console.log("지웠어!", new_recipe_list)
             return { list: new_recipe_list };
         }
 
